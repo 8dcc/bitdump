@@ -1,33 +1,36 @@
-#+title: Title (WIP)
+#+title: bitdump
 #+author: 8dcc
 #+startup: showeverything
 
-#+begin_comment
-*TODO*: Change project-name and title
-*TODO*: Change output.out in Makefile
-#+end_comment
-
-I am a short description.
-
-This project was generated from a template, and the initial changes have not
-been pushed yet.
+[[https://man.cx/hexdump(1)][Hexdump]], for bits.
 
 * Building
 
 Clone the repository and build the project using =make=.
 
 #+begin_src bash
-git clone https://github.com/8dcc/project-name
-cd project-name
+git clone https://github.com/8dcc/bitdump
+cd bitdump
 make
 # ...
 #+end_src
 
 * Usage
 
-For more information about the program, run it with the =--help= argument.
+By default, the program reads from =stdin= and writes to =stdout=, so it can be used
+with Unix pipes.
 
 #+begin_src bash
-./project-name.out --help
-# ...
+echo abc | tee file.txt
+# abc
+
+hexdump file.txt
+# 0000000 6261 0a63
+# 0000004
+
+xxd file.txt
+# 00000000: 6162 630a                                abc.
+
+bitdump file.txt
+# 00000000: 01100001 01110011 01100100 00001010
 #+end_src
