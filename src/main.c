@@ -24,6 +24,8 @@
 /*
  * Maximum number of bytes (not bits) that can be displayed in a single row of
  * the output.
+ *
+ * TODO: Read from command-line arguments.
  */
 #define BYTES_PER_ROW 8
 
@@ -76,9 +78,9 @@ int main(int argc, char** argv) {
          * Print the file offset, if this byte is the first one of its row.
          *
          * NOTE: We are currently displaying the number of printed bytes, which
-         * matches the input offset since we read from the first byte. If we add
-         * some '--input-offset' argument, we should display that value (while
-         * still changing lines depending on 'num_printed').
+         * matches the input offset since we read from the first byte.
+         * TODO: If we add some '--input-offset' argument, we should display
+         * that value (while still changing lines depending on 'num_printed').
          */
         if ((num_printed % BYTES_PER_ROW) == 0)
             printf("%08lX: ", num_printed);
@@ -92,7 +94,11 @@ int main(int argc, char** argv) {
         num_printed++;
 
         /*
-         * If the character is the last one of its row, move to the next one.
+         * If the character is the last one of its row, move to the next
+         * one. Otherwise, print the byte separator.
+         *
+         * TODO: Support command-line byte grouping (e.g. insert the separator
+         * every N bytes).
          */
         if ((num_printed % BYTES_PER_ROW) == 0)
             putchar('\n');
